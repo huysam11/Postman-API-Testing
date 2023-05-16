@@ -52,9 +52,16 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "{{baseURL}}/status",
 					"host": [
@@ -62,6 +69,63 @@
 					],
 					"path": [
 						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"console.log(response.status);\r",
+							"console.log(response['status']);\r",
+							"\r",
+							"pm.test(\"Status should be OK\", () =>{\r",
+							"    pm.expect(response.status).to.eql(\"OK\");\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"List of Books\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"clientName\": \"Valentin\",\r\n   \"clientEmail\": \"valenti1n@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api-clients",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api-clients"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -424,7 +488,7 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
-							"postman.setNextRequest(\"null\");"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -467,63 +531,6 @@
 						{
 							"key": "orderId",
 							"value": "{{orderId}}"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "API client",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"const response = pm.response.json();\r",
-							"\r",
-							"console.log(response.status);\r",
-							"console.log(response['status']);\r",
-							"\r",
-							"pm.test(\"Status should be OK\", () =>{\r",
-							"    pm.expect(response.status).to.eql(\"OK\");\r",
-							"});\r",
-							"\r",
-							"postman.setNextRequest(\"List of Books\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n   \"clientName\": \"Valentin\",\r\n   \"clientEmail\": \"valenti1n@example.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseURL}}/api-clients",
-					"host": [
-						"{{baseURL}}"
-					],
-					"path": [
-						"api-clients"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": "",
-							"disabled": true
 						}
 					]
 				}
