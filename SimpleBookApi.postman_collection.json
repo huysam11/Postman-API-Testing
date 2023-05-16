@@ -96,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"clientName\": \"{{$randomName}}\",\r\n   \"clientEmail\": \"{{$randomEmail}}\"\r\n}",
+					"raw": "{\r\n   \"clientName\": \"qatest\",\r\n   \"clientEmail\": \"qatest@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
